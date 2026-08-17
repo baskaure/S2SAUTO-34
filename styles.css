@@ -704,6 +704,17 @@ a { color: inherit; text-decoration: none; }
   .nav__links a { font-size: 1.6rem; font-family: var(--font-display); text-transform: uppercase; color: var(--paper); }
   .nav__links.is-open { opacity: 1; pointer-events: auto; }
 
+  /* Menu ouvert : on fige la page derrière, et on retire le backdrop-filter
+     de .nav (il crée un containing block qui casse le position:fixed de
+     l'overlay .nav__links quand .is-scrolled est actif). */
+  body.menu-open { overflow: hidden; }
+  body.menu-open .nav.is-scrolled {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+
   .nav__cta { display: none; }
   .nav__burger { display: flex; z-index: 110; }
   .nav__burger.is-open span:first-child { transform: translateY(4px) rotate(45deg); }
